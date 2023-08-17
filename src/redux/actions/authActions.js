@@ -1,11 +1,6 @@
 import authAPI from "../../services/api";
+import history from "../../utils/history";
 import * as types from "./types";
-
-export const loginRequest = () => {
-  return {
-    type: types.LOGIN_REQUEST
-  };
-};
 
 export const loginSuccess = (user) => {
   return {
@@ -23,11 +18,10 @@ export const loginFailure = (error) => {
 
 export const loginUser = (credentials) => {
   return async (dispatch) => {
-    dispatch(loginRequest());
-
     try {
       const user = await authAPI.login(credentials);
       dispatch(loginSuccess(user));
+      history.push("/dashboard");
     } catch (error) {
       dispatch(loginFailure(error));
     }

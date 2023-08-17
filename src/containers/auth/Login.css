@@ -10,7 +10,7 @@ body {
 }
 
 .screen {
-  background: linear-gradient(90deg, #5d54a4, #7c78b8);
+  background: ghostwhite;
   position: relative;
   height: 600px;
   width: 360px;
@@ -122,7 +122,7 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
-  color: #4c489d;
+  color: #5d54a4;
   box-shadow: 0px 2px 2px #5c5696;
   cursor: pointer;
   transition: 0.2s;

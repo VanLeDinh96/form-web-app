@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import {
-  loginFailure,
-  loginRequest,
-  loginSuccess,
-  loginUser
-} from "../../redux/actions/authActions";
-import * as types from "../../redux/actions/types";
+import { loginUser } from "../../redux/actions/authActions";
 import "./Login.css";
 
 const Login = ({ loginUser }) => {
-  const [username, setUsername] = useState("");
+  const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleUsernameChange = (event) => {
@@ -20,28 +14,10 @@ const Login = ({ loginUser }) => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-  const loginRequest = () => {
-    return {
-      type: types.LOGIN_REQUEST
-    };
-  };
 
-  // const loginSuccess = (user) => {
-  //   return {
-  //     type: types.LOGIN_SUCCESS,
-  //     payload: user
-  //   };
-  // };
-
-  // const loginFailure = (error) => {
-  //   return {
-  //     type: types.LOGIN_FAILURE,
-  //     payload: error
-  //   };
-  // };
-
-  const handleLogin = () => {
-    loginUser({ username, password });
+  const handleLogin = (event) => {
+    event.preventDefault();
+    loginUser({ email, password });
   };
   return (
     <div className="container">
@@ -54,7 +30,7 @@ const Login = ({ loginUser }) => {
                 type="text"
                 className="login__input"
                 placeholder="User name / Email"
-                value={username}
+                value={email}
                 onChange={handleUsernameChange}
               />
             </div>
@@ -80,9 +56,6 @@ const Login = ({ loginUser }) => {
 };
 
 const mapDispatchToProps = {
-  loginRequest,
-  loginSuccess,
-  loginFailure,
   loginUser
 };
 
