@@ -1,19 +1,17 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080", // Replace with your actual API base URL
-  timeout: 10000, // Set timeout for requests
+  baseURL: "http://localhost:8080",
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json"
   }
 });
 
 const apiEndpoints = {
-  login: "/auth/login" // Replace with your login endpoint
-  // Other API endpoints for CRUD operations can be added here
+  login: "/auth/login"
 };
 
-// Auth API functions
 const authAPI = {
   login: async (credentials) => {
     try {
@@ -23,7 +21,6 @@ const authAPI = {
       throw error;
     }
   }
-  // Other authentication-related API functions can be added here
 };
 
 export default authAPI;

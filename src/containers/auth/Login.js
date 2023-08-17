@@ -1,4 +1,3 @@
-// Login.js
 import React from "react";
 import { connect } from "react-redux";
 import {
@@ -9,8 +8,6 @@ import {
 } from "../../redux/actions/authActions";
 
 class Login extends React.Component {
-  // ... component code ...
-
   handleLogin = () => {
     const { username, password } = this.state;
 
@@ -18,8 +15,6 @@ class Login extends React.Component {
 
     this.props.loginUser({ username, password });
   };
-
-  // ... rest of the component ...
 }
 
 const mapDispatchToProps = {

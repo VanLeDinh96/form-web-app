@@ -1,4 +1,4 @@
-import authAPI from "../../services/api"; // Update the path accordingly
+import authAPI from "../../services/api";
 import * as types from "./types";
 
 export const loginRequest = () => {
@@ -28,7 +28,6 @@ export const loginUser = (credentials) => {
     try {
       const user = await authAPI.login(credentials);
       dispatch(loginSuccess(user));
-      // You can perform any additional actions after successful login
     } catch (error) {
       dispatch(loginFailure(error));
     }

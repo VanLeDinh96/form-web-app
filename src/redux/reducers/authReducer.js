@@ -14,7 +14,6 @@ const authReducer = (state = initialState, action) => {
       return { ...state, user: action.payload, loading: false, error: null };
     case types.LOGIN_FAILURE:
       return { ...state, loading: false, error: action.payload };
-    // Add other cases for different actions if needed
     default:
       return state;
   }
