@@ -19,9 +19,11 @@ export const loginFailure = (error) => {
 export const loginUser = (credentials) => {
   return async (dispatch) => {
     try {
-      const user = await authAPI.login(credentials);
-      dispatch(loginSuccess(user));
-      history.push("/dashboard");
+      const response = await authAPI.login(credentials);
+      const token = response.token;
+      localStorage.setItem("token", token);
+      dispatch(loginSuccess(credentials));
+      history.push("/");
     } catch (error) {
       dispatch(loginFailure(error));
     }
