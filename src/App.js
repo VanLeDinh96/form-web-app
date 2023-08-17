@@ -1,26 +1,29 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Redirect,
+  Route,
+  BrowserRouter as Router,
+  Switch
+} from "react-router-dom";
 import "./App.css";
-import Home from "./containers/Home";
-import Login from "./containers/auth/Login";
-import PrivateRoute from "./utils/PrivateRoute";
+import Login from "./components/auth/Login";
+import Home from "./components/home/Home";
 
 const App = ({ isAuthenticated }) => {
+  console.log("authen ", isAuthenticated);
   return (
     <Router>
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute
-          path="/home"
-          isAuthenticated={isAuthenticated}
-          component={Home}
-        />
-        <PrivateRoute
-          path="/"
-          isAuthenticated={isAuthenticated}
-          component={Home}
-        />
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          {isAuthenticated ? <Home /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/dashboard">
+          {isAuthenticated ? <Home /> : <Redirect to="/login" />}
+        </Route>
       </Switch>
     </Router>
   );

@@ -9,13 +9,30 @@ const instance = axios.create({
 });
 
 const apiEndpoints = {
-  login: "/auth/login"
+  login: "/auth/login",
+  validateToken: "/validate-token"
 };
 
 const authAPI = {
   login: async (credentials) => {
     try {
       const response = await instance.post(apiEndpoints.login, credentials);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  validateToken: async (token) => {
+    try {
+      const response = await instance.post(
+        apiEndpoints.validateToken,
+        {},
+        {
+          headers: {
+            Authorization: `${token}`
+          }
+        }
+      );
       return response.data;
     } catch (error) {
       throw error;

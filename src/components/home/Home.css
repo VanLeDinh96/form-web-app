@@ -1,0 +1,22 @@
+.dashboard {
+  padding: 20px;
+}
+
+.survey-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.survey {
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .survey-list {
+    grid-template-columns: 1fr;
+  }
+}

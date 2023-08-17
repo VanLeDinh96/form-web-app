@@ -20,12 +20,33 @@ export const loginUser = (credentials) => {
   return async (dispatch) => {
     try {
       const response = await authAPI.login(credentials);
-      const token = response.token;
+      const { token } = response.data;
       localStorage.setItem("token", token);
-      dispatch(loginSuccess(credentials));
+      const { name, email, role } = response.data;
+      const user = { name, email, role };
+      dispatch(loginSuccess(user));
       history.push("/");
     } catch (error) {
       dispatch(loginFailure(error));
+    }
+  };
+};
+
+export const checkAuthStatus = () => {
+  return async (dispatch) => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      try {
+        const response = await authAPI.validateToken(storedToken);
+        const { name, email, role } = response.data;
+        const user = { name, email, role };
+        dispatch(loginSuccess(user));
+      } catch (error) {
+        dispatch(loginFailure(error.message));
+      }
+    } else {
+      dispatch(loginFailure("Token not found"));
     }
   };
 };
