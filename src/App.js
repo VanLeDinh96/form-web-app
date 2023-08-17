@@ -12,7 +12,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route exact path="/login" component={Login} />
         <PrivateRoute
           path="/dashboard"
           isAuthenticated={isAuthenticated}
