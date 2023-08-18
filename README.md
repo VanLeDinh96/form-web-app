@@ -54,6 +54,8 @@ Contributions to the Survey Form Web App are welcome! If you encounter any issue
 
 This project is licensed under the [MIT License](LICENSE).
 
----
+## Credits
 
-Happy surveying! 📝📊
+This project was developed with love and dedication by [Lê Đình Văn](https://github.com/VanLeDinh96), [Lê Đình Quân](https://github.com/Doflamingo1998).
+
+Thank you for choosing the Survey Form project. We hope you enjoy using it and find it useful for your survey needs. Happy surveying! 📝📊
