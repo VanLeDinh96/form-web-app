@@ -1,7 +1,7 @@
 import React from "react";
-import "./Home.css";
+import "./Dashboard.css";
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <main className="dashboard">
       <h1>Survey Dashboard</h1>
@@ -19,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Dashboard;

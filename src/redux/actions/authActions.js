@@ -25,7 +25,7 @@ export const loginUser = (credentials) => {
       const { name, email, role } = response.data;
       const user = { name, email, role };
       dispatch(loginSuccess(user));
-      history.push("/");
+      history.push("/dashboard");
     } catch (error) {
       dispatch(loginFailure(error));
     }

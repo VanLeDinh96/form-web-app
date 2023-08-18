@@ -7,8 +7,8 @@ import {
   Switch
 } from "react-router-dom";
 import "./App.css";
-import Login from "./components/auth/Login";
-import Home from "./components/home/Home";
+import Login from "./pages/auth";
+import Home from "./pages/home";
 
 const App = ({ isAuthenticated }) => {
   console.log("authen ", isAuthenticated);
@@ -16,9 +16,9 @@ const App = ({ isAuthenticated }) => {
     <Router>
       <Switch>
         <Route path="/login">
-          <Login />
+          {isAuthenticated ? <Redirect to="/dashboard" /> : <Login />}
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           {isAuthenticated ? <Home /> : <Redirect to="/login" />}
         </Route>
         <Route path="/dashboard">
