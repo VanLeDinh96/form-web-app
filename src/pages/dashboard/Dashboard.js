@@ -1,7 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "react-modal";
+import { connect } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Dashboard.css";
 
-const Dashboard = () => {
+const Dashboard = ({ isAuthenticated }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [newSurveyTitle, setNewSurveyTitle] = useState("");
+  const [newSurveyDescription, setNewSurveyDescription] = useState("");
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setNewSurveyTitle("");
+    setNewSurveyDescription("");
+  };
+
+  const handleNewSurveySubmit = () => {
+    if (isAuthenticated) {
+      toast.success("New survey added successfully!", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+      });
+    } else {
+      toast.error("Failed to add new survey. Please log in first.", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+      });
+    }
+
+    closeModal();
+  };
+
   return (
     <main className="main">
       <div className="main__content">
@@ -11,7 +53,9 @@ const Dashboard = () => {
             className="search-bar"
             placeholder="Search surveys..."
           />
-          <button className="btn-new-survey">Add New Survey</button>
+          <button className="btn-new-survey" onClick={openModal}>
+            Add New Survey
+          </button>
         </div>
         <div className="survey-list">
           <div className="survey-card">
@@ -28,8 +72,51 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <div className="modal__close" onClick={closeModal}>
+          &times;
+        </div>
+        <h2 className="modal__title">Add New Survey</h2>
+        <input
+          type="text"
+          className="modal__input"
+          placeholder="Title"
+          value={newSurveyTitle}
+          onChange={(e) => setNewSurveyTitle(e.target.value)}
+        />
+        <input
+          type="text"
+          className="modal__input"
+          placeholder="Description"
+          value={newSurveyDescription}
+          onChange={(e) => setNewSurveyDescription(e.target.value)}
+        />
+        <div className="modal__buttons">
+          <button className="modal__button submit" onClick={closeModal}>
+            Cancel
+          </button>
+          <button
+            className="modal__button cancel"
+            onClick={handleNewSurveySubmit}
+          >
+            Submit
+          </button>
+        </div>
+      </Modal>
+
+      <ToastContainer />
     </main>
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Dashboard);
