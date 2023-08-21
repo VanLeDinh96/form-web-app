@@ -135,3 +135,26 @@ button {
   background-color: #ccc;
   color: #333;
 }
+
+.modal__button.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal__button:hover {
+  background-color: #ddd;
+}
+
+.modal__button:active {
+  background-color: #ccc;
+}
+
+.modal__button:focus {
+  outline: none;
+}
+
+.modal__button:disabled {
+  background-color: #ccc;
+  color: #333;
+  cursor: not-allowed;
+}
