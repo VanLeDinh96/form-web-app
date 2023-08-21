@@ -1,4 +1,4 @@
-import authAPI from "../../services/api";
+import { authAPI } from "../../services/api";
 import history from "../../utils/history";
 import * as types from "./types";
 
@@ -48,5 +48,13 @@ export const checkAuthStatus = () => {
     } else {
       dispatch(loginFailure("Token not found"));
     }
+  };
+};
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    localStorage.removeItem("token");
+    dispatch({ type: types.LOGOUT });
+    history.push("/login");
   };
 };
