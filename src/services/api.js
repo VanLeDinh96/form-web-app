@@ -10,10 +10,11 @@ const instance = axios.create({
 
 const apiEndpoints = {
   login: "/auth/login",
-  validateToken: "/validate-token"
+  validateToken: "/validate-token",
+  createAndListSurvey: "/surveys"
 };
 
-const authAPI = {
+export const authAPI = {
   login: async (credentials) => {
     try {
       const response = await instance.post(apiEndpoints.login, credentials);
@@ -40,4 +41,35 @@ const authAPI = {
   }
 };
 
-export default authAPI;
+export const surveyAPI = {
+  createSurvey: async (survey) => {
+    try {
+      const storedToken = localStorage.getItem("token");
+      const response = await instance.post(
+        apiEndpoints.createAndListSurvey,
+        survey,
+        {
+          headers: {
+            Authorization: `${storedToken}`
+          }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  listSurvey: async () => {
+    try {
+      const storedToken = localStorage.getItem("token");
+      const response = await instance.get(apiEndpoints.createAndListSurvey, {
+        headers: {
+          Authorization: `${storedToken}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+};
